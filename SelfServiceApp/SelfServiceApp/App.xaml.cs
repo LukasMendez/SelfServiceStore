@@ -11,7 +11,7 @@ namespace SelfServiceApp
         {
             InitializeComponent();
 
-            MainPage = new OrderView();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
