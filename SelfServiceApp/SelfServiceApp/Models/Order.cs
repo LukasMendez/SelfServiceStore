@@ -6,10 +6,8 @@ namespace SelfServiceApp.Models
 {
     public class Order
     {
-        public int ProductID { get; set; }
-        public string Barcode { get; set; }
-        public string ProductName { get; set; }
-        public string Description { get; set; }
-        public int Amount { get; set; }
+        public int OrderID { get; set; }
+        public List<Product> Products { get; set; }
     }
+
 }

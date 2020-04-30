@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelfServiceApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace SelfServiceApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new OrderView();
         }
 
         protected override void OnStart()

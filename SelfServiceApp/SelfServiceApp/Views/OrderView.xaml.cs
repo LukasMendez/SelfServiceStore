@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelfServiceApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,14 @@ namespace SelfServiceApp.Views
         public OrderView()
         {
             InitializeComponent();
+            orderViewModel = new OrderViewModel();
+            this.BindingContext = orderViewModel;
+            ProductsListView.ItemsSource = orderViewModel.Products;
+
         }
+
+        OrderViewModel orderViewModel;
+
+
     }
 }
