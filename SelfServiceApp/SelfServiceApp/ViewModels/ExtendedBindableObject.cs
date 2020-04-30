@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace SelfServiceApp.ViewModels
 {
-    class ExtendedBindableObject : BindableObject
+    public class ExtendedBindableObject : BindableObject
     {
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {

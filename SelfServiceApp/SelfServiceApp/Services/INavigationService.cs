@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SelfServiceApp.Services
 {
-    interface INavigationService
+    public interface INavigationService
     {
         BaseViewModel PreviousPageViewModel { get; }
 

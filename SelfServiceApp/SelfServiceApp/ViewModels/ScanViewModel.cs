@@ -7,7 +7,7 @@ using ZXing;
 
 namespace SelfServiceApp.ViewModels
 {
-    public class ScanViewModel
+    public class ScanViewModel : BaseViewModel
     {
         //private readonly IRMAApiService _rmaApiService;
         //private readonly ISettingsService _settingsService;
@@ -24,6 +24,7 @@ namespace SelfServiceApp.ViewModels
             set
             {
                 barcode = value;
+                this.OnPropertyChanged();
             }
         }
 
