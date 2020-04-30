@@ -29,7 +29,7 @@
                 x:Name="scannerOverlay"                                                       
                 BottomText="Place the red line over the barcode you'd like to scan." />
         <Frame Grid.Row="2" BackgroundColor="#272525" Padding="30" CornerRadius="1" BorderColor="#272525">
-            <Button Grid.Row="2" BackgroundColor="Black" Text="Go back" TextColor="White" Clicked="Button_Clicked" CornerRadius="50"/>
+            <Button Grid.Row="2" BackgroundColor="Black" Text="Go back" TextColor="White" CornerRadius="50"/>
         </Frame>
     </Grid>
 </ContentPage>

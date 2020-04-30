@@ -6,7 +6,7 @@ using SelfServiceApp.Services;
 
 namespace SelfServiceApp.ViewModels
 {
-    class BaseViewModel : ExtendedBindableObject
+    public class BaseViewModel : ExtendedBindableObject
     {
         protected readonly INavigationService NavigationService;
 
