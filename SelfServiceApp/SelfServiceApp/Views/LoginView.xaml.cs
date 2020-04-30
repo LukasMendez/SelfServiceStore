@@ -16,5 +16,6 @@ namespace SelfServiceApp.Views
         {
             InitializeComponent();
         }
+
     }
 }
