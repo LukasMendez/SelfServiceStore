@@ -16,7 +16,7 @@ namespace WebServiceMiddleLayer
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration; // hello
         }
 
         public IConfiguration Configuration { get; }

@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace SelfServiceApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginView : ContentPage
+    public partial class ScanView : ContentPage
     {
-        public LoginView()
+        public ScanView()
         {
             InitializeComponent();
         }
-
     }
 }
