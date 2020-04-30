@@ -7,9 +7,11 @@
              x:Class="SelfServiceApp.Views.RegisterView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Welcome to Xamarin.Forms!" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="usernameEntry"  Placeholder="User Name" Keyboard="Name"/>
+            <Entry x:Name="emailEntry"  Placeholder="User Email" Keyboard="Email"/>
+            <Entry x:Name="phonenumberEntry" Placeholder="PhoneNumber" Keyboard="Telephone"/>
+            <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

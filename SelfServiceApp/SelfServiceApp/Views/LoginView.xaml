@@ -7,9 +7,10 @@
              x:Class="SelfServiceApp.Views.LoginView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Welcome to Login View!" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="emailEntry"  Placeholder="Email:" Keyboard="Email"/>
+            <Entry x:Name="passwordEntry" Placeholder="password" IsPassword="True"/>
+            <Button x:Name="loginButton" Text="Log-in" Clicked="loginButton_Clicked" BackgroundColor="Black" TextColor="White" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
