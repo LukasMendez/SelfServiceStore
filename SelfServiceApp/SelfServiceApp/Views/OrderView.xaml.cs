@@ -16,14 +16,6 @@ namespace SelfServiceApp.Views
         public OrderView()
         {
             InitializeComponent();
-            orderViewModel = new OrderViewModel();
-            this.BindingContext = orderViewModel;
-            ProductsListView.ItemsSource = orderViewModel.Products;
-
         }
-
-        OrderViewModel orderViewModel;
-
-
     }
 }
