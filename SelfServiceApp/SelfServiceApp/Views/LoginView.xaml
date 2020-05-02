@@ -8,8 +8,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Login View!" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" />
-            <Entry  Placeholder="Email" Keyboard="Email"/>
-            <Entry Placeholder="Password" IsPassword="True"/>
+            <Entry  Placeholder="Email" Keyboard="Email" Text="{Binding Email}"/>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
             <Button Text="Log-in" BackgroundColor="Black" TextColor="White" />
         </StackLayout>
     </ContentPage.Content>
