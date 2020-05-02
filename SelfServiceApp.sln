@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfServiceApp.iOS", "SelfS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfServiceApp", "SelfServiceApp\SelfServiceApp\SelfServiceApp.csproj", "{F473EABB-59C4-4983-B4F7-D48216D01539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceMiddleLayer", "WebServiceMiddleLayer\WebServiceMiddleLayer.csproj", "{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,18 +73,6 @@ Global
 		{F473EABB-59C4-4983-B4F7-D48216D01539}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{F473EABB-59C4-4983-B4F7-D48216D01539}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{F473EABB-59C4-4983-B4F7-D48216D01539}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|iPhone.Build.0 = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{1BFD3DDF-81D3-4B1F-9A2E-3F65BAF97AB2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

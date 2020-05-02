@@ -4,6 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:baseViewModel="clr-namespace:SelfServiceApp.ViewModels"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              x:Class="SelfServiceApp.Views.ScanView">
     <Grid BackgroundColor="#272525">
@@ -25,9 +27,10 @@
             ScanResultCommand="{Binding ScanCommand}"
             WidthRequest="400" 
             HeightRequest="400" />
-        <zxing:ZXingDefaultOverlay               
+        <zxing:ZXingDefaultOverlay
+                Grid.Row="1"
                 x:Name="scannerOverlay"                                                       
-                BottomText="Place the red line over the barcode you'd like to scan." />
+                BottomText="Place the red line over the barcode you'd like to scan." HorizontalOptions="Center" />
         <Frame Grid.Row="2" BackgroundColor="#272525" Padding="30" CornerRadius="1" BorderColor="#272525">
             <Button Grid.Row="2" BackgroundColor="Black" Text="Go back" TextColor="White" CornerRadius="50"/>
         </Frame>

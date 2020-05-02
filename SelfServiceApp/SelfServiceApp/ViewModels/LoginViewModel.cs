@@ -10,18 +10,33 @@ namespace SelfServiceApp.ViewModels
     class LoginViewModel : BaseViewModel
     {
 
-        bool isBusy = false;
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set { email = value; this.OnPropertyChanged(); }
+        }
 
-        // Navigates to the Startpage
-        public ICommand NavigateToSentenceCMD => new Command(async () => {
-            if (isBusy)
-                return;
-            isBusy = true;
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set { password = value; this.OnPropertyChanged(); }
+        }
 
-            //await NavigationService.NavigateToAsync<HomeViewModel>(); Show the next page then login happen successfully. 
 
-            isBusy = false;
-        });
+        public ICommand OnLoginCommand;
+
+        public LoginViewModel()
+        {
+            OnLoginCommand = new Command(() =>
+            {
+
+            });
+
+        }
+
+
 
 
     }

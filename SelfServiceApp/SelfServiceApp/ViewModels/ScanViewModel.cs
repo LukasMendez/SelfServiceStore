@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using SelfServiceApp.Views;
 using Xamarin.Forms;
 using ZXing;
 
@@ -67,7 +68,12 @@ namespace SelfServiceApp.ViewModels
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         Barcode = Result.Text;
-                        await App.Current.MainPage.DisplayAlert("Scanned Item", Result.Text, "Ok");
+                      //  await App.Current.MainPage.DisplayAlert("Scanned Item", Result.Text, "Ok");
+
+                        App.WebConnection.ScanItem(Barcode);
+
+                        App.Current.MainPage = new OrderView();
+
                     });
 
                     IsAnalyzing = true;

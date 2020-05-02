@@ -15,8 +15,8 @@ namespace SelfServiceApp.ViewModels
 
         public BaseViewModel()
         {
-            NavigationService = ViewModelLocator.Resolve<INavigationService>();
-            var settingsService = ViewModelLocator.Resolve<ISettingsService>();
+         //   NavigationService = ViewModelLocator.Resolve<INavigationService>();
+         //   var settingsService = ViewModelLocator.Resolve<ISettingsService>();
 
         }
         public virtual Task InitializeAsync(object navigationData)
