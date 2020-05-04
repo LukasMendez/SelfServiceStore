@@ -32,8 +32,6 @@ namespace SelfServiceApp
 
         public App()
         {
-            WebConnection.Connect();
-
             ServiceContainer.Register<ScanViewModel>(() => new ScanViewModel());
             ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
 
@@ -45,7 +43,7 @@ namespace SelfServiceApp
 
             ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
 
-            var mainPage = new MainPage();
+            var mainPage = new ScanView();
             MainPage = new NavigationPage(mainPage);
 
         }

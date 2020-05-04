@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SelfServiceApp.Helpers;
 using SelfServiceApp.Models;
+using Xamarin.Essentials;
 
 namespace SelfServiceApp.Services
 {
@@ -23,6 +29,7 @@ namespace SelfServiceApp.Services
             .WithUrl($"{Constants.HostName}" + "/navHub")
             .Build();
 
+            httpClient = new HttpClient();
 
             hubConnection.On<string>(Constants.ScannedProduct, (product) =>
             {
@@ -45,27 +52,131 @@ namespace SelfServiceApp.Services
         }
 
 
-        public async void ScanItem(string barcode)
+        public async Task<Product> ScanItem(string barcode)
         {
+            var post = new { Barcode = barcode };
+
+            // Product to be returned
+            Product product = null;
+
+            var content = JsonConvert.SerializeObject(post);
+            Console.WriteLine(content);
             try
             {
-                await hubConnection.InvokeAsync(Constants.ScanItem, barcode);
+                var response = await httpClient.PostAsync(Constants.HostName + "/product/scanItem", new StringContent(content, Encoding.UTF8, "application/json"));
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+
+                    string body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Response: " + body);
+                    JObject jObj = JObject.Parse(body);
+
+                    if (jObj != null)
+                    {
+                        barcode = (string)jObj.SelectToken("Barcode"); // Should be the same
+                        string productName = (string)jObj.SelectToken("ProductName");
+                        string description = (string)jObj.SelectToken("Description");
+                        int stock = (int)jObj.SelectToken("Stock");
+                        double price = (double)jObj.SelectToken("Price");
+
+
+                        product = new Product(barcode, productName, description, stock, price);
+
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (System.Threading.Tasks.TaskCanceledException ex)
             {
-                Console.WriteLine(ex.InnerException.Message);
+                Console.WriteLine(ex.Message);
             }
 
+            // If registration was incomplete we return false
+            return product; // Caller should perform nullcheck in case no product is fetched / barcode is invalid
+
         }
 
-        public bool Login(string email, string password)
+        public async Task<bool> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var post = new Customer()
+            {
+                Email = email,
+                Password = password
+            };
+
+            var content = JsonConvert.SerializeObject(post);
+            Console.WriteLine(content);
+            try
+            {
+                var response = await httpClient.PostAsync(Constants.HostName + "/account/login", new StringContent(content, Encoding.UTF8, "application/json"));
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+
+                    string body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Response: " + body);
+                    JObject jObj = JObject.Parse(body);
+                    if (jObj != null)
+                    {
+                        bool authProp = (bool)jObj.SelectToken("authorized");
+                        // We store this preferences for later use 
+                        Preferences.Set(GlobalKeys.AuthorizedKey, authProp);
+
+                    }
+                    // If registration was a sucess we return true
+                    return true;
+                }
+            }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            // If registration was incomplete we return false
+            return false;
         }
 
-        public bool Register(string name, string email, string password, string phoneNo)
+        public async Task<bool> Register(string name, string email, string password, string phoneNo)
         {
-            throw new NotImplementedException();
+            var post = new Customer()
+            {
+                Name = name,
+                Email = email,
+                Password = password,
+                PhoneNumber = phoneNo
+            };
+
+            var content = JsonConvert.SerializeObject(post);
+            Console.WriteLine(content);
+            try
+            {
+                var response = await httpClient.PostAsync(Constants.HostName + "/account/register", new StringContent(content, Encoding.UTF8, "application/json"));
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+
+                    string body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Response: " + body);
+                    JObject jObj = JObject.Parse(body);
+                    if (jObj != null)
+                    {
+                        bool authProp = (bool)jObj.SelectToken("authorized");
+
+                        // We store this preferences for later use 
+                        Preferences.Set(GlobalKeys.AuthorizedKey, authProp);
+
+                    }
+                    // If registration was a sucess we return true
+                    return true;
+                }
+            }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            // If registration was incomplete we return false
+            return false;
         }
     }
 }

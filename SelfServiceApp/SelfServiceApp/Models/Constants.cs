@@ -8,5 +8,8 @@ namespace SelfServiceApp.Models
         public static string ScannedProduct { get; } = "ScannedProduct";
 
         public static string ScanItem { get; } = "ScanItem";
+
+        public static string RegisterCustomer { get; } = "Register";
+
     }
 }
