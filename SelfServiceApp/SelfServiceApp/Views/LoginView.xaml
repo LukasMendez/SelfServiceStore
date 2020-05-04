@@ -3,14 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ViewModel="clr-namespace:SelfServiceApp.ViewModels"
              mc:Ignorable="d"
              x:Class="SelfServiceApp.Views.LoginView">
-    <ContentPage.Content>
+	<ContentPage.BindingContext>
+		<ViewModel:LoginViewModel/>
+	</ContentPage.BindingContext>
+	<ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Login View!" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" />
             <Entry  Placeholder="Email" Keyboard="Email" Text="{Binding Email}"/>
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-            <Button Text="Log-in" BackgroundColor="Black" TextColor="White" />
+			<Button x:Name="loginButton" Text="Log-in" BackgroundColor="Black" TextColor="White" Command="{Binding OnLoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

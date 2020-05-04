@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -27,17 +28,31 @@ namespace SelfServiceApp.ViewModels
 
         public ICommand OnLoginCommand;
 
+        public static bool LoginSuccess = false;
+        public string Message { get; set; }
+
         public LoginViewModel()
         {
-            OnLoginCommand = new Command(() =>
+            OnLoginCommand = new Command(async () =>
             {
+                var isLoginSuccess = await App.WebConnection.Login(email, password);
+                if (isLoginSuccess)
+                {
+                    LoginSuccess = true;
+                    Message = "Login Successfully";
+                    Console.WriteLine(Message);
 
+                    await NavigationService.NavigateToAsync<OrderViewModel>();
+                }
+                else
+                {
+                    LoginSuccess = false;
+                    Message = "Error ... Retry Again Now or Later";
+                    Console.WriteLine(Message);
+                }
             });
 
         }
-
-
-
 
     }
 }
