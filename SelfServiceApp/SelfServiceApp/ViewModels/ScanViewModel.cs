@@ -38,6 +38,7 @@ namespace SelfServiceApp.ViewModels
                 if (!Equals(_isAnalyzing, value))
                 {
                     _isAnalyzing = value;
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -51,8 +52,15 @@ namespace SelfServiceApp.ViewModels
                 if (!Equals(_isScanning, value))
                 {
                     _isScanning = value;
+                    this.OnPropertyChanged();
                 }
             }
+        }
+
+        public void StartScanning()
+        {
+            IsAnalyzing = true;
+            IsScanning = true;
         }
 
         public Command ScanCommand
@@ -68,16 +76,18 @@ namespace SelfServiceApp.ViewModels
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         Barcode = Result.Text;
-                      //  await App.Current.MainPage.DisplayAlert("Scanned Item", Result.Text, "Ok");
 
-                        App.WebConnection.ScanItem(Barcode);
-
+                        // Get the product from the barcode 
+                        var product = await App.WebConnection.ScanItem(Barcode);
+                        // Get a reference to the orderviewmodel
+                        var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
+                        // Add the product to its collection (observablecollection)
+                        orderViewModel.Products.Add(product);
+                        // Switch to the orderview so the user can see it
                         App.Current.MainPage = new OrderView();
 
                     });
 
-                    IsAnalyzing = true;
-                    IsScanning = true;
                 });
             }
         }

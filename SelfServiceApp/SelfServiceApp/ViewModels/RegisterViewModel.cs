@@ -4,6 +4,7 @@ using System.Text;
 
 namespace SelfServiceApp.ViewModels
 {
+
     class RegisterViewModel
     {
     }
