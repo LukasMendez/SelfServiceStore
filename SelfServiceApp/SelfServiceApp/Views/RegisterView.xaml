@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:ViewModel="clr-namespace:SelfServiceApp.ViewModels"
              mc:Ignorable="d"
              x:Class="SelfServiceApp.Views.RegisterView">
-    <ContentPage.Content>
+	<ContentPage.BindingContext>
+		<ViewModel:RegisterViewModel/>
+	</ContentPage.BindingContext>
+	<ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Entry x:Name="usernameEntry"  Placeholder="User Name" Keyboard="Name"/>
-            <Entry x:Name="emailEntry"  Placeholder="User Email" Keyboard="Email"/>
-            <Entry x:Name="phonenumberEntry" Placeholder="PhoneNumber" Keyboard="Telephone"/>
-            <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True"/>
+            <Entry x:Name="usernameEntry"  Placeholder="User Name" Keyboard="Name" Text="{Binding Name}"/>
+			<Entry x:Name="emailEntry"  Placeholder="User Email" Keyboard="Email" Text="{Binding Email}"/>
+			<Entry x:Name="phonenumberEntry" Placeholder="PhoneNumber" Keyboard="Telephone" Text="{Binding PhoneNo}"/>
+			<Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+			<Button x:Name="registerButton" Text="Log-in" BackgroundColor="Black" TextColor="White" Command="{Binding OnRegisterCommand}" Clicked="registerButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
