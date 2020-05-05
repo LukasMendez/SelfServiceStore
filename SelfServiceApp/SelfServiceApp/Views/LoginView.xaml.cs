@@ -18,19 +18,5 @@ namespace SelfServiceApp.Views
             InitializeComponent();
         }
 
-        private async void loginButton_Clicked(object sender, EventArgs e)
-        {
-            await Task.Delay(5000); //Ka være der ikke er behov for den, alt efter hvor hurtigt det bliver udført, eller kortere tidspunkt
-
-            if (LoginViewModel.LoginSuccess == true)
-            {
-                await DisplayAlert("Success", "Login Success ", "OK");
-            }
-            else
-            {
-                await DisplayAlert("Error", "Username or password no correct ", "OK");
-            }
-
-        }
     }
 }

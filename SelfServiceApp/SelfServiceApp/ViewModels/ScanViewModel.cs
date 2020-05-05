@@ -63,6 +63,12 @@ namespace SelfServiceApp.ViewModels
             IsScanning = true;
         }
 
+        public void StopScanning()
+        {
+            IsAnalyzing = false;
+            IsScanning = false;
+        }
+
         public Command ScanCommand
         {
             get
@@ -70,8 +76,7 @@ namespace SelfServiceApp.ViewModels
                 return new Command(() =>
 
                 {
-                    IsAnalyzing = false;
-                    IsScanning = false;
+                    StopScanning();
 
                     Device.BeginInvokeOnMainThread(async () =>
                     {
@@ -82,7 +87,40 @@ namespace SelfServiceApp.ViewModels
                         // Get a reference to the orderviewmodel
                         var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
                         // Add the product to its collection (observablecollection)
-                        orderViewModel.Products.Add(product);
+                        if (product != null)
+                        {
+                            orderViewModel.Products.Add(product);
+                            // Switch to the orderview so the user can see it
+                            App.Current.MainPage = new OrderView();
+
+                        } else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Error", "This item is invalid, please scan another one", "OK");
+                            StartScanning();
+                        }
+
+
+                    });
+
+                });
+            }
+        }
+
+
+        public Command BackCommand
+        {
+            get
+            {
+                return new Command(() =>
+
+                {
+                    StopScanning();
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        // Get a reference to the orderviewmodel
+                        var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
+
                         // Switch to the orderview so the user can see it
                         App.Current.MainPage = new OrderView();
 
@@ -91,15 +129,12 @@ namespace SelfServiceApp.ViewModels
                 });
             }
         }
+
         public Result Result { get; set; }
         public ScanViewModel()
         {
          //   PropertyChanged += ScanningViewModel_PropertyChanged; // TODO USE BASE VIEW MODEL 
         }
 
-        private void ScanningViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
     }
 }

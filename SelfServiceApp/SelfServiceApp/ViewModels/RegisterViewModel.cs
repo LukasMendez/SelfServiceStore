@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using SelfServiceApp.Services;
+using SelfServiceApp.Views;
 using Xamarin.Forms;
 
 namespace SelfServiceApp.ViewModels
 {
 
-    class RegisterViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
 
         private string email;
@@ -38,7 +40,9 @@ namespace SelfServiceApp.ViewModels
             set { phoneNo = value; this.OnPropertyChanged(); }
         }
 
-        public ICommand OnRegisterCommand;
+        public ICommand OnRegisterCommand { get; set; }
+
+        public ICommand OnLoginCommand { get; set; }
 
         public string Message { get; set; }
 
@@ -54,8 +58,7 @@ namespace SelfServiceApp.ViewModels
                     RegisterDone = true;
                     Message = "Done ... Registration Succesfully";
                     Console.WriteLine(Message);
-                    await NavigationService.NavigateToAsync<LoginViewModel>();
-
+                    App.Current.MainPage = new LoginView();
                 }
                 else
                 {
@@ -63,6 +66,11 @@ namespace SelfServiceApp.ViewModels
                     Message = "Error ... Retry again later :(";
                     Console.WriteLine(Message);
                 }
+            });
+
+            OnLoginCommand = new Command(() =>
+            {
+                App.Current.MainPage = new LoginView();
             });
 
         }

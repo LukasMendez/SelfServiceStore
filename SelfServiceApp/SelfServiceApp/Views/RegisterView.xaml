@@ -3,20 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:ViewModel="clr-namespace:SelfServiceApp.ViewModels"
              mc:Ignorable="d"
-             x:Class="SelfServiceApp.Views.RegisterView">
-	<ContentPage.BindingContext>
-		<ViewModel:RegisterViewModel/>
-	</ContentPage.BindingContext>
+             xmlns:baseViewModel="clr-namespace:SelfServiceApp.ViewModels"
+             baseViewModel:ViewModelLocator.AutoWireViewModel="True"
+             x:Class="SelfServiceApp.Views.RegisterView"
+             BackgroundColor="Black">
 	<ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Entry x:Name="usernameEntry"  Placeholder="User Name" Keyboard="Name" Text="{Binding Name}"/>
-			<Entry x:Name="emailEntry"  Placeholder="User Email" Keyboard="Email" Text="{Binding Email}"/>
-			<Entry x:Name="phonenumberEntry" Placeholder="PhoneNumber" Keyboard="Telephone" Text="{Binding PhoneNo}"/>
-			<Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
-			<Button x:Name="registerButton" Text="Log-in" BackgroundColor="Black" TextColor="White" Command="{Binding OnRegisterCommand}" Clicked="registerButton_Clicked"/>
+        <StackLayout VerticalOptions="Center" Padding="40" Spacing="20">
+            <Label Text="Register" FontSize="Title" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+            <Entry Placeholder="Name"  Text="{Binding Name}"/>
+			<Entry Placeholder="Email" Text="{Binding Email}"/>
+			<Entry Placeholder="PhoneNumber" Text="{Binding PhoneNo}"/>
+			<Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+			<Button Text="Sign-up" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnRegisterCommand}" />
+			<Button Text="Already have an account?" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnLoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

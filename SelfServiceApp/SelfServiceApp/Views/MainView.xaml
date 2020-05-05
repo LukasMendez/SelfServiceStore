@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:baseViewModel="clr-namespace:SelfServiceApp.ViewModels;assembly=SelfServiceApp"
+    baseViewModel:ViewModelLocator.AutoWireViewModel="true"
+    x:Class="SelfServiceApp.Views.MainView" BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" Padding="100">
+            <Image Source="facebook_image.png"/>
+            <Label Margin="0,20,0,0" HorizontalOptions="Center" Text="Welcome" TextColor="White" FontAttributes="Bold" FontSize="Title"/>
+            <Frame WidthRequest="200" Margin="0,40,0,0" CornerRadius="30" BackgroundColor="LightGreen">
+            <Button Text="New order" TextColor="Black" Command="{Binding NewOrderCommand}"/>
+            </Frame>
+             <Frame WidthRequest="200" Margin="0,40,0,0" CornerRadius="30" BackgroundColor="Orange">
+            <Button Text="Sign-out" TextColor="Black" Command="{Binding SignOutCommand}"/>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
