@@ -87,6 +87,7 @@ namespace SelfServiceApp.ViewModels
                         // Get a reference to the orderviewmodel
                         var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
                         // Add the product to its collection (observablecollection)
+                        orderViewModel.CurrentOrder.Add(product);
                         if (product != null)
                         {
                             orderViewModel.Products.Add(product);

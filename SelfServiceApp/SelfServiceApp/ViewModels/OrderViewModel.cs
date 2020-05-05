@@ -43,7 +43,11 @@ namespace SelfServiceApp.ViewModels
                 },
                 (object message) => { Console.WriteLine("*CanScan*"); return true; });
             this.BuyCommand = new Command(
-                (object message) => { Console.WriteLine("*Buy*"); },
+                (object message) => 
+                { 
+                    Console.WriteLine("*Buy*");
+                    PurchaseCurrentOrder();
+                },
                 (object message) => { Console.WriteLine("*CanBuy*"); return true; });
             this.CancelCommand = new Command(
                 (object message) => {
@@ -53,9 +57,9 @@ namespace SelfServiceApp.ViewModels
                 (object message) => { Console.WriteLine("*CanCancel*"); return true; });
 
             //Test Products
-            CurrentOrder.Add(new Product("45678914", "mælk", "økologisk", 1, 8.95));
-            CurrentOrder.Add(new Product("48145414", "rugbrød", "solsikke kerner", 1, 15.95));
-            CurrentOrder.Add(new Product("87654514", "franskbrød", "fuldkorn", 1, 12.95));
+            CurrentOrder.Add(new Product("574923923", "Beef", "Regular beef", 1, 20.00));
+            CurrentOrder.Add(new Product("123456554", "Milk", "Milk", 1, 40.00));
+            CurrentOrder.Add(new Product("148382383", "Nutella", "Nutella", 1, 40.00));
         }
 
         WebConnection webConnection = new WebConnection(); 
