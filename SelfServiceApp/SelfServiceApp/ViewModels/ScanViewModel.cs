@@ -82,7 +82,7 @@ namespace SelfServiceApp.ViewModels
                         // Get a reference to the orderviewmodel
                         var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
                         // Add the product to its collection (observablecollection)
-                        orderViewModel.Products.Add(product);
+                        orderViewModel.CurrentOrder.Add(product);
                         // Switch to the orderview so the user can see it
                         App.Current.MainPage = new OrderView();
 
