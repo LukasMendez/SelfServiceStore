@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using SelfServiceApp.Models;
 
 namespace SelfServiceApp.Services
 {
     public interface IWebConnection
     {
-        void ScanItem(string barcode);
+        Task<Product> ScanItem(string barcode);
         void Connect();
-        bool Login(string email, string password);
-        bool Register(string name, string email, string password, string phoneNo);
+        Task<bool> Login(string email, string password);
+        Task<bool> Register(string name, string email, string password, string phoneNo);
     }
 }
