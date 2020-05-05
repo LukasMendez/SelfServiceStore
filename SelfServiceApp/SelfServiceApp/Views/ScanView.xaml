@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <Frame Grid.Row="0" BackgroundColor="#272525" CornerRadius="0">
-            <Label Text="Scan the QR code" FontAttributes="Bold" FontFamily="Arial" FontSize="Subtitle" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+            <Label Text="Scan the barcode" FontAttributes="Bold" FontFamily="Arial" FontSize="Subtitle" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"></Label>
         </Frame>
         <zxing:ZXingScannerView 
             Grid.Row="1" 
@@ -25,14 +25,15 @@
             IsAnalyzing="{Binding IsAnalyzing}"
             Result="{Binding Result, Mode=TwoWay}" 
             ScanResultCommand="{Binding ScanCommand}"
+           
             WidthRequest="400" 
             HeightRequest="400" />
         <zxing:ZXingDefaultOverlay
                 Grid.Row="1"
-                x:Name="scannerOverlay"                                                       
+                x:Name="scannerOverlay"
                 BottomText="Place the red line over the barcode you'd like to scan." HorizontalOptions="Center" />
         <Frame Grid.Row="2" BackgroundColor="#272525" Padding="30" CornerRadius="1" BorderColor="#272525">
-            <Button Grid.Row="2" BackgroundColor="Black" Text="Go back" TextColor="White" CornerRadius="50"/>
+            <Button Grid.Row="2" BackgroundColor="Black" Text="Go back" TextColor="White" CornerRadius="50" Command="{Binding BackCommand}"/>
         </Frame>
     </Grid>
 </ContentPage>

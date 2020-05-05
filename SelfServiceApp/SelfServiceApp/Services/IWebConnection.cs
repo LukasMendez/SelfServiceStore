@@ -9,7 +9,6 @@ namespace SelfServiceApp.Services
     public interface IWebConnection
     {
         Task<Product> ScanItem(string barcode);
-        void Connect();
         Task<bool> Login(string email, string password);
         Task<bool> Register(string name, string email, string password, string phoneNo);
     }

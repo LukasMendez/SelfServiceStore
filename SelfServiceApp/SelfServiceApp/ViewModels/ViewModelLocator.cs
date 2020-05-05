@@ -29,6 +29,7 @@ namespace SelfServiceApp.ViewModels
         }
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            Console.WriteLine("ONAUTOWIREMODELCHANGED WAS CALLED");
             var view = bindable as Element;
             if (view == null)
             {
@@ -43,9 +44,11 @@ namespace SelfServiceApp.ViewModels
             var viewModelType = Type.GetType(viewModelName);
             if (viewModelType == null)
             {
+                Console.WriteLine("ViewModel type was null");
                 return;
             }
             var viewModel = ServiceContainer.Resolve(viewModelType);
+            Console.WriteLine("Setting binding context of {0} to {1}", view.GetType(), viewModel.GetType());
             view.BindingContext = viewModel;
         }
     }
