@@ -167,5 +167,15 @@ namespace SelfServiceApp.Services
             // If registration was incomplete we return false
             return false;
         }
+
+        public async Task<HttpResponseMessage> CreateOrder(Order order) {
+            using (var httpClient = new HttpClient { BaseAddress = new Uri(Constants.HostName) }) {
+                string jsonOrder = JsonConvert.SerializeObject(order);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/order/create");
+                request.Content = new StringContent(jsonOrder, Encoding.UTF8, "application/json");
+
+                return await httpClient.SendAsync(request);
+            }
+        }
     }
 }

@@ -48,7 +48,10 @@ namespace SelfServiceApp
             //MainPage = new NavigationPage(mainPage);
             OnStart();
 
+            ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
 
+            var mainPage = new ScanView();
+            MainPage = new NavigationPage(mainPage);
         }
 
         protected override void OnStart()

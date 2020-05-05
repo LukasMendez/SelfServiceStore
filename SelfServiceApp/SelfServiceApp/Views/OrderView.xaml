@@ -13,7 +13,7 @@
             <ListView x:Name="ProductsListView"
                 VerticalOptions="Fill"
                 HasUnevenRows="true"
-                ItemsSource="{Binding Products}">
+                ItemsSource="{Binding CurrentOrder}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
