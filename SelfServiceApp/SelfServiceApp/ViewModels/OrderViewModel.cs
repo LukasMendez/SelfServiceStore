@@ -1,4 +1,3 @@
-
 ﻿using Newtonsoft.Json;
 using SelfServiceApp.Models;
 using SelfServiceApp.Services;
@@ -6,6 +5,7 @@ using SelfServiceApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -19,8 +19,18 @@ namespace SelfServiceApp.ViewModels
         public Command BuyCommand { set; get; }
         public Command CancelCommand { set; get; }
 
+        // Activity monitoring (quick and dirty)
+        private const int timeoutSeconds = 10;
+        public bool ShouldSignout = true;
+        public bool PageActive { get; set; } = false;
+
+
         public OrderViewModel() {
+
             CurrentOrder = new ObservableCollection<Product>();
+
+            // This part monitors inactivity
+            CheckActivityState();
 
             this.ScanCommand = new Command(
                 (object message) =>
@@ -36,7 +46,10 @@ namespace SelfServiceApp.ViewModels
                 (object message) => { Console.WriteLine("*Buy*"); },
                 (object message) => { Console.WriteLine("*CanBuy*"); return true; });
             this.CancelCommand = new Command(
-                (object message) => { Console.WriteLine("*Cancel*"); },
+                (object message) => {
+                    PageActive = false;
+                    App.Current.MainPage = new MainView();
+                    Console.WriteLine("*Cancel*"); },
                 (object message) => { Console.WriteLine("*CanCancel*"); return true; });
 
             //Test Products
@@ -52,5 +65,33 @@ namespace SelfServiceApp.ViewModels
             await webConnection.CreateOrder(order);
         }
 
+        public void CheckActivityState()
+        {
+            // Copy of current collection
+            ObservableCollection<Product> productsCopy = new ObservableCollection<Product>(Products);
+
+            Device.StartTimer(TimeSpan.FromSeconds(timeoutSeconds), () =>
+            {
+
+              //   bool equal = productsCopy.SequenceEqual(Products); <-- Another approach 
+                ShouldSignout = productsCopy.All(Products.Contains) && productsCopy.Count == Products.Count;
+
+                
+                // If both collections contain the same data and have the same count after x amount of time, it means that the user has been inative
+                if (ShouldSignout && PageActive)
+                {
+                    UserLoginService.SignOut();
+                    return false; // False = Stop the timer <- Needs to be started again next time page is loaded 
+                }
+                else
+                {
+                    // Else we will take a new copy of the current collection and wait x amount of time again
+                    productsCopy = new ObservableCollection<Product>(Products);
+                    return true;
+                }
+
+                
+            });
+        }
     }
 }

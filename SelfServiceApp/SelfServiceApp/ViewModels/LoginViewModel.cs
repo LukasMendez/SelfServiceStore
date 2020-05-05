@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
+using SelfServiceApp.Services;
+using SelfServiceApp.Views;
 using Xamarin.Forms;
 
 
 namespace SelfServiceApp.ViewModels
 {
-    class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
 
         private string email;
@@ -26,7 +28,9 @@ namespace SelfServiceApp.ViewModels
         }
 
 
-        public ICommand OnLoginCommand;
+        public ICommand OnLoginCommand { get; set; }
+
+        public ICommand OnRegisterCommand { get; set; }
 
         public static bool LoginSuccess = false;
         public string Message { get; set; }
@@ -35,14 +39,17 @@ namespace SelfServiceApp.ViewModels
         {
             OnLoginCommand = new Command(async () =>
             {
+                Console.WriteLine("*Logging in*");
                 var isLoginSuccess = await App.WebConnection.Login(email, password);
                 if (isLoginSuccess)
                 {
                     LoginSuccess = true;
                     Message = "Login Successfully";
                     Console.WriteLine(Message);
+                    // Will sign in and save the email for later use
+                    UserLoginService.SignIn(email);
 
-                    await NavigationService.NavigateToAsync<OrderViewModel>();
+                    App.Current.MainPage = new MainView();
                 }
                 else
                 {
@@ -51,6 +58,11 @@ namespace SelfServiceApp.ViewModels
                     Console.WriteLine(Message);
                 }
             });
+
+            OnRegisterCommand = new Command(() =>
+           {
+               App.Current.MainPage = new RegisterView();
+           });
 
         }
 

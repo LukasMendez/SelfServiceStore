@@ -39,18 +39,6 @@ namespace SelfServiceApp.Services
 
         }
 
-        public async void Connect()
-        {
-            try
-            {
-                await hubConnection.StartAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
 
         public async Task<Product> ScanItem(string barcode)
         {
@@ -77,18 +65,19 @@ namespace SelfServiceApp.Services
                         barcode = (string)jObj.SelectToken("Barcode"); // Should be the same
                         string productName = (string)jObj.SelectToken("ProductName");
                         string description = (string)jObj.SelectToken("Description");
-                        int stock = (int)jObj.SelectToken("Stock");
+                        int amount = 1; 
                         double price = (double)jObj.SelectToken("Price");
 
 
-                        product = new Product(barcode, productName, description, stock, price);
+                        product = new Product(barcode, productName, description, amount, price);
 
                     }
                 }
             }
-            catch (System.Threading.Tasks.TaskCanceledException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+
             }
 
             // If registration was incomplete we return false
@@ -123,16 +112,16 @@ namespace SelfServiceApp.Services
                         Preferences.Set(GlobalKeys.AuthorizedKey, authProp);
 
                     }
-                    // If registration was a sucess we return true
+                    // If login was a sucess we return true
                     return true;
                 }
             }
-            catch (System.Threading.Tasks.TaskCanceledException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
 
-            // If registration was incomplete we return false
+            // If login was incomplete we return false
             return false;
         }
 
@@ -170,9 +159,9 @@ namespace SelfServiceApp.Services
                     return true;
                 }
             }
-            catch (System.Threading.Tasks.TaskCanceledException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
 
             // If registration was incomplete we return false
