@@ -43,6 +43,7 @@ namespace SelfServiceApp
 
             ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
 
+
             var mainPage = new ScanView();
             MainPage = new NavigationPage(mainPage);
 
