@@ -72,13 +72,13 @@ namespace SelfServiceApp.ViewModels
         public void CheckActivityState()
         {
             // Copy of current collection
-            ObservableCollection<Product> productsCopy = new ObservableCollection<Product>(Products);
+            ObservableCollection<Product> productsCopy = new ObservableCollection<Product>(CurrentOrder);
 
             Device.StartTimer(TimeSpan.FromSeconds(timeoutSeconds), () =>
             {
 
               //   bool equal = productsCopy.SequenceEqual(Products); <-- Another approach 
-                ShouldSignout = productsCopy.All(Products.Contains) && productsCopy.Count == Products.Count;
+                ShouldSignout = productsCopy.All(CurrentOrder.Contains) && productsCopy.Count == CurrentOrder.Count;
 
                 
                 // If both collections contain the same data and have the same count after x amount of time, it means that the user has been inative
@@ -90,7 +90,7 @@ namespace SelfServiceApp.ViewModels
                 else
                 {
                     // Else we will take a new copy of the current collection and wait x amount of time again
-                    productsCopy = new ObservableCollection<Product>(Products);
+                    productsCopy = new ObservableCollection<Product>(CurrentOrder);
                     return true;
                 }
 

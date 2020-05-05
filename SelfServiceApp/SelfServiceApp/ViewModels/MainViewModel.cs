@@ -22,7 +22,7 @@ namespace SelfServiceApp.ViewModels
                     // Get a reference to the orderviewmodel
                     var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
                     // Clear the collection of products from previous
-                    orderViewModel.Products.Clear();
+                    orderViewModel.CurrentOrder.Clear();
                     orderViewModel.PageActive = true;
                     orderViewModel.CheckActivityState();
                     // Switch to the orderview so the user can see it

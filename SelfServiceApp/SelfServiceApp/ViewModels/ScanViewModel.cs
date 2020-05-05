@@ -90,7 +90,7 @@ namespace SelfServiceApp.ViewModels
                         orderViewModel.CurrentOrder.Add(product);
                         if (product != null)
                         {
-                            orderViewModel.Products.Add(product);
+                            orderViewModel.CurrentOrder.Add(product);
                             // Switch to the orderview so the user can see it
                             App.Current.MainPage = new OrderView();
 
