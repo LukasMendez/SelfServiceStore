@@ -45,7 +45,7 @@ namespace SelfServiceApp
 
             ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
 
-            var mainPage = new MainPage();
+            var mainPage = new OrderView();
             MainPage = new NavigationPage(mainPage);
 
         }

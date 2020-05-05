@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using SelfServiceApp.Models;
 
 namespace SelfServiceApp.Services
@@ -66,6 +68,16 @@ namespace SelfServiceApp.Services
         public bool Register(string name, string email, string password, string phoneNo)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<HttpResponseMessage> CreateOrder(Order order) {
+            using (var httpClient = new HttpClient { BaseAddress = new Uri(Constants.HostName) }) {
+                string jsonOrder = JsonConvert.SerializeObject(order);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/order/create");
+                request.Content = new StringContent(jsonOrder, Encoding.UTF8, "application/json");
+
+                return await httpClient.SendAsync(request);
+            }
         }
     }
 }
