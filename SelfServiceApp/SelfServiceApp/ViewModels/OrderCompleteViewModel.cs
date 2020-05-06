@@ -15,6 +15,7 @@ namespace SelfServiceApp.ViewModels
                 {
                     var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
                     orderViewModel.CurrentOrder.Clear();
+                    orderViewModel.TotalPrice = 0;
                     App.Current.MainPage = new OrderView();
                 },
                 (object message) => { Console.WriteLine("*"); return true; });
