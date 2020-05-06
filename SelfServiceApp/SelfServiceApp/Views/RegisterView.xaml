@@ -11,10 +11,10 @@
 	<ContentPage.Content>
         <StackLayout VerticalOptions="Center" Padding="40" Spacing="20">
             <Label Text="Register" FontSize="Title" TextColor="White" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-            <Entry Placeholder="Name"  Text="{Binding Name}"/>
-			<Entry Placeholder="Email" Text="{Binding Email}"/>
-			<Entry Placeholder="PhoneNumber" Text="{Binding PhoneNo}"/>
-			<Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            <Entry Placeholder="Name"  Text="{Binding Name}" BackgroundColor="White" TextColor="Black"/>
+			<Entry Placeholder="Email" Text="{Binding Email}" BackgroundColor="White" TextColor="Black"/>
+			<Entry Placeholder="PhoneNumber" Text="{Binding PhoneNo}" BackgroundColor="White" TextColor="Black"/>
+			<Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" BackgroundColor="White" TextColor="Black"/>
 			<Button Text="Sign-up" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnRegisterCommand}" />
 			<Button Text="Already have an account?" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnLoginCommand}"/>
         </StackLayout>

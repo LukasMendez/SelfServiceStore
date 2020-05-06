@@ -40,23 +40,31 @@ namespace SelfServiceApp.ViewModels
             OnLoginCommand = new Command(async () =>
             {
                 Console.WriteLine("*Logging in*");
-                var isLoginSuccess = await App.WebConnection.Login(email, password);
-                if (isLoginSuccess)
+                if(!String.IsNullOrEmpty(Email) && !String.IsNullOrEmpty(Password))
                 {
-                    LoginSuccess = true;
-                    Message = "Login Successfully";
-                    Console.WriteLine(Message);
-                    // Will sign in and save the email for later use
-                    UserLoginService.SignIn(email);
+                    var isLoginSuccess = await App.WebConnection.Login(email, password);
+                    if (isLoginSuccess)
+                    {
+                        LoginSuccess = true;
+                        Message = "Login Successfully";
+                        Console.WriteLine(Message);
+                        // Will sign in and save the email for later use
+                        UserLoginService.SignIn(email);
 
-                    App.Current.MainPage = new MainView();
-                }
-                else
+                        App.Current.MainPage = new MainView();
+                    }
+                    else
+                    {
+                        LoginSuccess = false;
+                        Message = "Error ... Retry Again Now or Later";
+                        await App.Current.MainPage.DisplayAlert("Error", "Email or password incorrect. Please try again", "OK");
+                        Console.WriteLine(Message);
+                    }
+                } else
                 {
-                    LoginSuccess = false;
-                    Message = "Error ... Retry Again Now or Later";
-                    Console.WriteLine(Message);
+                    await App.Current.MainPage.DisplayAlert("Error", "Please make sure to fill all the fields", "OK");
                 }
+               
             });
 
             OnRegisterCommand = new Command(() =>

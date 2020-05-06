@@ -31,7 +31,7 @@ namespace SelfServiceApp.ViewModels
         public Command CancelCommand { set; get; }
 
         // Activity monitoring (quick and dirty)
-        private const int timeoutSeconds = 60;
+        private const int timeoutSeconds = 45; // Seconds of inactivity before closing session
         public bool ShouldSignout = true;
         public bool PageActive { get; set; } = false;
 

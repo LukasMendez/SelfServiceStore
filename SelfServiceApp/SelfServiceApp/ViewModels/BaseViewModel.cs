@@ -8,9 +8,6 @@ namespace SelfServiceApp.ViewModels
 {
     public class BaseViewModel : ExtendedBindableObject
     {
-        protected readonly INavigationService NavigationService;
-
-        internal static string UserName = "";
 
 
         public BaseViewModel()

@@ -42,7 +42,7 @@ namespace SelfServiceApp
             InitializeComponent();
             ServiceContainer.Register<ISettingsService>(() => new SettingsService());
             _settingsService = ServiceContainer.Resolve<ISettingsService>();
-            ServiceContainer.Register<INavigationService>(() => new NavigationService(_settingsService));
+
 
             //var mainPage = new ScanView();
             //MainPage = new NavigationPage(mainPage);
