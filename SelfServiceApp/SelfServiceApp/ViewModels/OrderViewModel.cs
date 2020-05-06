@@ -16,6 +16,16 @@ namespace SelfServiceApp.ViewModels
     public class OrderViewModel : BaseViewModel
     {
         public ObservableCollection<Product> CurrentOrder { get; set; }
+        private double totalPrice;
+
+        public double TotalPrice {
+            get { return totalPrice; }
+            set {
+                totalPrice = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         public Command ScanCommand { set; get; }
         public Command BuyCommand { set; get; }
         public Command CancelCommand { set; get; }
@@ -39,7 +49,7 @@ namespace SelfServiceApp.ViewModels
                     var scanViewModel = ServiceContainer.Resolve<ScanViewModel>();
                     scanViewModel.StartScanning();
                     App.Current.MainPage = new ScanView();
-
+                    
                     Console.WriteLine("*Scan*");
                 },
                 (object message) => { Console.WriteLine("*CanScan*"); return true; });

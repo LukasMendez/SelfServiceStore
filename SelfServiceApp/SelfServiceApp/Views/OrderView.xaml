@@ -82,15 +82,17 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Button Command="{Binding ScanCommand}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Scan" CornerRadius="25" BackgroundColor="LightSeaGreen" FontSize="Large" TextColor="White"/>
-                <Button Command="{Binding BuyCommand}" Grid.Row="1" Grid.Column="1" Text="Buy" CornerRadius="25" BackgroundColor="CadetBlue" FontSize="Large" TextColor="White"/>
-                <Button Command="{Binding CancelCommand}" Grid.Row="1" Grid.Column="0" Text="Cancel" CornerRadius="25" BackgroundColor="CadetBlue" FontSize="Large" TextColor="White"/>
+
+                <Label Text="{Binding TotalPrice, StringFormat='total price: {0} kr.'}" FontSize="Medium" HorizontalOptions="Center"/>
+                <Button Command="{Binding ScanCommand}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Scan" CornerRadius="25" BackgroundColor="LightSeaGreen" FontSize="Large" TextColor="White"/>
+                <Button Command="{Binding BuyCommand}" Grid.Row="2" Grid.Column="1" Text="Buy" CornerRadius="25" BackgroundColor="CadetBlue" FontSize="Large" TextColor="White"/>
+                <Button Command="{Binding CancelCommand}" Grid.Row="2" Grid.Column="0" Text="Cancel" CornerRadius="25" BackgroundColor="CadetBlue" FontSize="Large" TextColor="White"/>
             </Grid>
 
         </StackLayout>

@@ -91,6 +91,10 @@ namespace SelfServiceApp.ViewModels
                         if (product != null)
                         {
                             orderViewModel.CurrentOrder.Add(product);
+                            orderViewModel.TotalPrice = 0;
+                            foreach (var item in orderViewModel.CurrentOrder) {
+                                orderViewModel.TotalPrice += item.Price * item.Amount;
+                            }
                             // Switch to the orderview so the user can see it
                             App.Current.MainPage = new OrderView();
 
