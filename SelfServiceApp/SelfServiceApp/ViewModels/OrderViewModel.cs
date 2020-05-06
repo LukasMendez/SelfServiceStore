@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -20,7 +21,7 @@ namespace SelfServiceApp.ViewModels
         public Command CancelCommand { set; get; }
 
         // Activity monitoring (quick and dirty)
-        private const int timeoutSeconds = 10;
+        private const int timeoutSeconds = 60;
         public bool ShouldSignout = true;
         public bool PageActive { get; set; } = false;
 
@@ -66,7 +67,10 @@ namespace SelfServiceApp.ViewModels
         private async void PurchaseCurrentOrder() {
             //Create Order Object
             Order order = new Order(new List<Product>(CurrentOrder), "test@mail.dk");
-            await webConnection.CreateOrder(order);
+            HttpResponseMessage response = await webConnection.CreateOrder(order);
+            if (response.IsSuccessStatusCode) {
+                App.Current.MainPage = new OrderCompleteView();
+            }
         }
 
         public void CheckActivityState()
