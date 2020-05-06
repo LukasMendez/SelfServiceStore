@@ -49,6 +49,8 @@ namespace SelfServiceApp
             OnStart();
 
             ServiceContainer.Register<OrderViewModel>(() => new OrderViewModel());
+            ServiceContainer.Register<OrderCompleteViewModel>(() => new OrderCompleteViewModel());
+
 
             var mainPage = new ScanView();
             MainPage = new NavigationPage(mainPage);

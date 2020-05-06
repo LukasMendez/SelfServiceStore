@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -15,6 +16,16 @@ namespace SelfServiceApp.ViewModels
     public class OrderViewModel : BaseViewModel
     {
         public ObservableCollection<Product> CurrentOrder { get; set; }
+        private double totalPrice;
+
+        public double TotalPrice {
+            get { return totalPrice; }
+            set {
+                totalPrice = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         public Command ScanCommand { set; get; }
         public Command BuyCommand { set; get; }
         public Command CancelCommand { set; get; }
@@ -38,7 +49,7 @@ namespace SelfServiceApp.ViewModels
                     var scanViewModel = ServiceContainer.Resolve<ScanViewModel>();
                     scanViewModel.StartScanning();
                     App.Current.MainPage = new ScanView();
-
+                    
                     Console.WriteLine("*Scan*");
                 },
                 (object message) => { Console.WriteLine("*CanScan*"); return true; });
@@ -66,7 +77,10 @@ namespace SelfServiceApp.ViewModels
         private async void PurchaseCurrentOrder() {
             //Create Order Object
             Order order = new Order(new List<Product>(CurrentOrder), "test@mail.dk");
-            await webConnection.CreateOrder(order);
+            HttpResponseMessage response = await webConnection.CreateOrder(order);
+            if (response.IsSuccessStatusCode) {
+                App.Current.MainPage = new OrderCompleteView();
+            }
         }
 
         public void CheckActivityState()
