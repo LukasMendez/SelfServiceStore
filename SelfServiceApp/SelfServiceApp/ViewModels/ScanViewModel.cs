@@ -29,7 +29,7 @@ namespace SelfServiceApp.ViewModels
             }
         }
 
-        private bool _isAnalyzing = true;
+        private bool _isAnalyzing = false;
         public bool IsAnalyzing
         {
             get { return _isAnalyzing; }
@@ -43,7 +43,7 @@ namespace SelfServiceApp.ViewModels
             }
         }
 
-        private bool _isScanning = true;
+        private bool _isScanning = false;
         public bool IsScanning
         {
             get { return _isScanning; }
@@ -81,15 +81,16 @@ namespace SelfServiceApp.ViewModels
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         Barcode = Result.Text;
+                        Console.WriteLine("Scanned barcode: " + Result.Text);
 
                         // Get the product from the barcode 
                         var product = await App.WebConnection.ScanItem(Barcode);
                         // Get a reference to the orderviewmodel
                         var orderViewModel = ServiceContainer.Resolve<OrderViewModel>();
-                        // Add the product to its collection (observablecollection)
-                        orderViewModel.CurrentOrder.Add(product);
+
                         if (product != null)
                         {
+                            // Add the product to its collection (observablecollection)
                             orderViewModel.CurrentOrder.Add(product);
                             // Switch to the orderview so the user can see it
                             App.Current.MainPage = new OrderView();
