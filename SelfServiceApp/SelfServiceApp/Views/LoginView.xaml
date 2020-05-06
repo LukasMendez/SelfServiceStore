@@ -12,8 +12,8 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center" Padding="40" Spacing="20">
             <Label Text="Login" FontSize="Title" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Entry Placeholder="Email" Keyboard="Email" Text="{Binding Email}"/>
-            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            <Entry Placeholder="Email" Keyboard="Email" Text="{Binding Email}" BackgroundColor="White" TextColor="Black"/>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" BackgroundColor="White" TextColor="Black"/>
             <Button Text="Log-in" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnLoginCommand}"/>
             <Button Text="Don't have an account?" BackgroundColor="DarkViolet" TextColor="White" Command="{Binding OnRegisterCommand}" />
         </StackLayout>
